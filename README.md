@@ -148,6 +148,5 @@ docker run -p 5601:5601 -d \
     --restart=always \
     -e ELASTICSEARCH_URL=http://elasticsearch:9200 \
     -v /data/conf/kibana.yml:/usr/share/kibana/config/kibana.yml \
-    -v /data/elastalert-kibana-plugin:/usr/share/kibana/plugins/elastalert-kibana-plugin \
     docker.elastic.co/kibana/kibana:6.6.2
 ```

@@ -1,10 +1,13 @@
 # ELK
 1.拉取镜像
+```
 docker pull docker.elastic.co/elasticsearch/elasticsearch:6.6.2
 docker pull docker.elastic.co/kibana/kibana:6.6.2
 docker pull docker.elastic.co/beats/filebeat:6.6.2
 docker pull docker.elastic.co/logstash/logstash:6.6.2
+```
 2.部署es
+```
 docker run -d \
     --user root \
     -p 127.0.0.1:9200:9200 \
@@ -19,8 +22,9 @@ docker run -d \
     docker.elastic.co/elasticsearch/elasticsearch:6.6.2
     
 chmod 777 -R /data/elasticsearch
+```
 3.部署Logstash 
-mkdir -pv /data/conf
+```mkdir -pv /data/conf
 cat > /data/conf/logstash.conf << "EOF"
 input {
   beats {
@@ -56,7 +60,9 @@ docker run -p 5043:5043 -d \
     --restart=always \
     -v /data/conf/logstash.conf:/usr/share/logstash/pipeline/logstash.conf \
     docker.elastic.co/logstash/logstash:6.6.2
+```
 4.部署filebeat
+```
 cat > /data/conf/filebeat.yml << "EOF"
 filebeat.inputs:
 - type: log
@@ -121,9 +127,10 @@ docker run -d \
     -v /var/lib/docker/containers/:/var/lib/docker/containers/ \
     -v /var/run/docker.sock:/var/run/docker.sock:ro \
     docker.elastic.co/beats/filebeat:6.6.2
+```
 5.部署kibana
 
-cat > /data/conf/kibana.yml << "EOF"
+```cat > /data/conf/kibana.yml << "EOF"
 # Default Kibana configuration from kibana-docker.
 
 server.name: kibana
@@ -143,3 +150,4 @@ docker run -p 5601:5601 -d \
     -v /data/conf/kibana.yml:/usr/share/kibana/config/kibana.yml \
     -v /data/elastalert-kibana-plugin:/usr/share/kibana/plugins/elastalert-kibana-plugin \
     docker.elastic.co/kibana/kibana:6.6.2
+```

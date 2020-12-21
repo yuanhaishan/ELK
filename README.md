@@ -103,7 +103,7 @@ processors:
 - drop_fields:
     fields: ["docker","metadata","beat","input","prospector","host","source","offset"]
 # 日志输出
-output.logstash: # 输出地址
+output.logstash: # 输出地址写内网ip地址
   hosts: ["192.168.30.42:5043"]
 #output.elasticsearch:
 #  hosts: ["192.168.30.42:9200"]
